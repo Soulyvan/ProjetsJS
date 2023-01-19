@@ -1,0 +1,7 @@
+{
+  "nom": {
+    "ekogha" : ["Informatique", "Cuisine", 22],
+    "patrick" : ["Musique", "Manga", 23]
+  },
+  "histoire" : "Il aime DIEU, la musique - l'informatique - les mangas et la cuisine"
+}

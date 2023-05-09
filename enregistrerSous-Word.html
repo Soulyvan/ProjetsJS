@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Télécharger le contenu d'un div au Format Word ".doc"</title>
+</head>
+<body>
+    <div id="contenu">
+        <!-- Ton contenu formaté -->
+    </div>
+    <button id="telecharger"></button>
+
+    <script type="text/javascript">
+        document.getElementById('telecharger').addEventListener('click', function(event) {
+            const content = document.getElementById('contenu'); // On récupère le div
+
+            // Convertir le contenu du div en un document Word
+            const preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title></head><body>";
+            const postHtml = "</body></html>";
+            const html = preHtml + content.innerHTML + postHtml; // content.innerHTML c'est pour récupérer le contenu du div avec le formatage
+
+            const source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html); // encodage pour word word
+            const fileDownload = document.createElement("a"); // Créer un lien de téléchargement
+            document.body.appendChild(fileDownload); // ajouter ce lien dans la page
+            fileDownload.href = source; // donner comme source de téléchargement notre contenu avec son encodage word
+            fileDownload.download = 'document.doc'; // donner un nom au fichier word .doc, donc dans notre cas "document.doc"
+            fileDownload.click(); // simuler un click pour ENREGISTRER-SOUS
+            document.body.removeChild(fileDownload); // supprimer le lien de la page
+
+            event.preventDefault(); // empecher le rechargement de la page au cas ou ça veut se recharger
+        });
+    </script>
+</body>
+</html>

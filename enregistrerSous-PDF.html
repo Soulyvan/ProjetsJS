@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Télécharger le contenu d'un div au Format PDF ".pdf"</title>
+</head>
+<body>
+    <div id="contenu">
+        <!-- Ton contenu formaté -->
+    </div>
+    <button id="telecharger"></button>
+
+    <!-- Bibliothèque pour télécharger en pdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+
+    <script type="text/javascript">
+        document.getElementById('telecharger').addEventListener('click', function(event) {
+            const content = document.getElementById('contenu'); // On récupère le div
+
+            html2pdf()
+            .set({
+              margin: 1,
+              filename: 'document.pdf',
+              image: { type: 'jpeg', quality: 0.98 },
+              html2canvas: { scale: 2 },
+              jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            })
+            .from(content.innerHTML)
+            .save();
+
+            event.preventDefault(); // empecher le rechargement de la page au cas ou ça veut se recharger
+        });
+    </script>
+</body>
+</html>
